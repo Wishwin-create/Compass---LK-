@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Destination Details</title>
+    <link rel="stylesheet" href="destination_detail.css">
+</head>
+<body>
+
+
+<header>
+    <div class="top-image-container">
+    <img id="top-image" alt="Destination Image">
+</div>
+    <div class="back-link">
+    <a href="destination.html" class="back-link">⬅ Back to Destination</a>
+</header>
+    
+<h1 class="destination-title" id="dest-title"></h1></div>
+
+
+<div class="destination-container">
+<section id="gallery">
+    <h2>Gallery</h2><br>
+    <div id="gallery-container"></div>
+</section>
+
+<br>
+
+<section id="about">
+    <h2 class="section-title">About</h2>
+    <p id="about-text" class="about-text"></p>
+</section>
+
+<div class = "divider"></div>
+
+
+<section id="reviews">
+
+    <div id="review-star"></div>
+    <div class="itinerary-btn-container">
+    <button id="addToItineraryBtn">Add to Itinerary</button>
+    </div>
+    <br>
+    <h2 class = "section-title">Reviews & Ratings</h2>
+    <div class="star-rating">
+        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+    </div>
+
+    
+    
+    <div class="review-label">Review (Optional)</div>
+    <textarea id="review-box" placeholder="Share your experience..."></textarea>
+
+    <button id="submit-btn">Submit Review</button>
+    <br>
+    <br>
+
+    <div id="review-container"></div>
+    
+</section>
+
+</div>
+
+<script src="destination_data.js"></script>
+<script src="destination_detail.js"></script>
+
+</body>
+</html>

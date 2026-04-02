@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Compass LK – Cultural Calendar</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="Calendar.css">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+ <header>
+        <a href="Landing_page.html" class="logo">
+            <img src="src/logo.png" width="34" /> Compass LK
+        </a>
+        <nav>
+            <a href="destination.html" >Destinations</a>
+            <a href="Calendar.html" data-page="Calender">Calendar</a>
+            <a href="Landing_page.html#how-to-use" class="help-btn" >Help</a>
+            <a href="itinerary.html" id="myItinerary" style="display:none;">My Itinerary</a></li>
+        </nav>
+        <div class="auth-section">
+            <button class="btn sign-in" onclick="window.location.href='login.html'">Sign In</button>
+            <button class="btn get-started" onclick="window.location.href='signup.html'">Get Started</button>
+
+        </div>
+    </header>
+<!-- ================= CONTENT ================= -->
+<div class="container">
+
+    <div class="header2">
+        <div>
+            <h1>Cultural Calendar</h1>
+            <p class="subtitle">Discover Sri Lanka's vibrant festivals and cultural events</p>
+
+            <div class="filters">
+                <div class="filter-pill active">Cultural</div>
+                <div class="filter-pill">Religious</div>
+                <div class="filter-pill">National</div>
+            </div>
+        </div>
+
+        <div class="year-controls">
+            <button class="year-btn" onclick="changeYear(-1)">◀</button>
+            <strong id="year">2025</strong>
+            <button class="year-btn" onclick="changeYear(1)">▶</button>
+
+            <select class="select" id ="categorySelect">
+                
+                <option value="Cultural">Cultural</option>
+                <option value="Religious">Religious</option>
+                <option value="National">National</option>
+                <option value="All">All Events</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div class="calendar-grid" id="calendar"></div>
+
+</div>
+
+<!-- ================= JS ================= -->
+
+<script src="Script.js"></script>
+<script src="Calendar.js"></script>
+
+<!--Event Modal-->
+<div id ="eventModal" class ="modal">
+    <div class="modal-content">
+        <span class = "close">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <hr>
+        <br>
+        <p id ="modalDesc"></p>
+    </div>
+</div>
+
+
+</body>
+</html>

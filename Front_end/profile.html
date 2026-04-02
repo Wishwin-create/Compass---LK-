@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <header>
+        <h1>Manage Your Profile</h1>
+        <a href="Landing_page.html" class = "backToHome" >Back to Home</a>
+    </header>
+    <div class="body-style">
+    <div class="profile-card">
+    
+    <div class="profile-header">
+        <div class="profile-pic-wrapper">
+            <img id="profileImage" src="src/profile.avif" alt="Profile">
+            <label for="imageUpload" class="camera-icon">📷</label>
+            <input type="file" id="imageUpload" accept="image/*">
+        </div>
+
+        <div>
+            <h2>My Profile</h2>
+            <p>Manage your account settings</p>
+        </div>
+    </div>
+
+    <form id="profileForm">
+
+        <label>Email</label>
+        <input type="email" id="email" disabled>
+
+        <label>Full Name</label>
+        <input type="text" id="fullName">
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter new password">
+
+        <label>Travel Interests</label>
+        <div class="interests">
+            <button type="button" data-value="Nature">Nature</button>
+            <button type="button" data-value="History">History</button>
+            <button type="button" data-value="Adventure">Adventure</button>
+            <button type="button" data-value="Culture">Culture</button>
+            <button type="button" data-value="Relaxation">Relaxation</button>
+        </div>
+
+        <button type="submit" class="save-btn">Save Changes</button>
+    </form>
+
+</div>
+</div>
+
+    <script src="profile.js"></script>
+</body>
+</html>

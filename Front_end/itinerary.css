@@ -1,0 +1,300 @@
+/* =============== GLOBAL STYLES =============== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background: linear-gradient(#daf5d5, #79eea8);
+    color: #222;
+    min-height: 100vh;
+}
+
+header {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+        }
+nav {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 50px;
+}
+
+nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #000000;
+            font-size: 16px;
+        }
+
+.logo {
+            font-family: 'Calibri', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 42px;
+            font-weight: 1000;
+            color: #1dcc63;
+            text-decoration: none;
+        }
+
+
+
+
+
+.btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+
+.sign-in {
+            background:#2ecc71;
+            border: 1px solid #fff;
+            color: #fff;
+        }
+.get-started {
+            background: #2ecc71;
+            border: 1px solid #fff;
+            color: #fff;
+        }
+
+.itinerary-container{
+   width: 80%;;
+   margin:auto;
+   padding: 30px;
+}
+
+.back-btn{
+    background:#16a920;
+    border: 1px solid ;
+    color: #fff;
+    text-decoration: none;
+}
+
+.destination-btn{
+    background:#16a920;
+    border: 1px solid ;
+    color: #fff;
+    text-decoration: none;
+}
+
+h1{
+    font-size: 36px;
+    text-align: center;
+    
+}
+
+.subtitle{
+    color : gray;
+    text-align: center;
+}
+
+
+
+.destination-list{
+    background:rgba(255, 255, 255, 0.574);
+    padding:30px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap:20px;
+}
+
+.empty{
+    display: flex;           /* make it a flex container */
+    flex-direction: column;  /* stack children vertically */
+    justify-content: center; /* vertical centering */
+    align-items: center;     /* horizontal centering */
+    text-align: center;
+    color: #777;
+    height: 200px; 
+}
+
+
+.destination-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px;
+    border-bottom:1px solid #eee;
+}
+.auth-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Modal Styles */
+/* Modal Background */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show{
+  display: flex;
+}
+
+.modal-content {
+  background:#f4f4f4;
+  padding:40px;
+  width:420px;
+  max-width:90%;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+  animation: popup 0.3s ease;
+  position:relative;
+  text-align:center;
+}
+.modal-label {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    font-weight:600;
+}
+.close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size: 14px;
+}
+
+#savePlanBtn{
+    width: 100%;
+    margin-top:20px;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background: linear-gradient(90deg,#56ab2f,#2ecc71);
+    color:white;
+    font-size:16px;
+    font-weight:600px;
+    cursor: pointer;
+}
+
+#savePlanBtn:hover{
+    opacity: 0.9;
+}
+
+.modal-content h2{
+    margin-bottom:10px;
+    color:#2ecc71;
+}
+
+.close{
+    position: absolute;
+    top:15px;
+    right:20px;
+    font-size:24px;
+    cursor:pointer;
+}
+@keyframes popup {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.destination-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 16px;
+    margin: 12px 0;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.destination-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.destination-card h3 {
+    margin: 0 0 8px 0;
+    color: #333;
+}
+
+.destination-card p {
+    margin: 4px 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: center; /* centers buttons in the container */
+    gap: 30px; /* space between buttons */
+    margin-top: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+    flex: 0 0 120px; /* fixed width for consistency */
+    padding: 10px 0; /* vertical padding for height */
+    font-size: 1rem;
+    color: white;
+    border: none;
+    border-radius: 5px; /* fully rounded pill shape */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.edit-btn {
+    background-color: #16a920;
+}
+
+.edit-btn:hover {
+    background-color: #13871b;
+    transform: scale(1.05);
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}

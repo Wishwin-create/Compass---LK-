@@ -1,0 +1,235 @@
+/* ================== GLOBAL ================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: #f3f4f6;
+    color: #1f2933;
+}
+
+
+
+.top-image-container {
+    width: 100%;
+    height: 230px;      /* Half of the image height */
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.top-image-container img {
+    width: 100%;
+    height: 320px;      /* Full image height */
+    object-fit: cover;
+    opacity: 0.5;           /* Optional fade */
+    
+}
+
+/* ================== BACK LINK ================== */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 40px;
+    font-size: 20px;
+    color: #111;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: none;
+    color: #175c62;
+}
+
+/* ================== MAIN CARD ================== */
+.destination-container {
+    max-width: 1100px;
+    margin: 0 auto 50px;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 40px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ================== TITLE ================== */
+.destination-title {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding: 0 40px;
+}
+
+/* ================== META INFO ================== */
+.destination-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #6b7280;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.destination-meta .rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #111;
+}
+
+.destination-meta .rating span {
+    color: #f59e0b;
+    font-size: 18px;
+}
+
+/* ================== SECTION HEADINGS ================== */
+.section-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* ================== IMAGE GALLERY ================== */
+#gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+#gallery-container img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* ================== IMAGE GALLERY HOVER EFFECT ================== */
+
+#gallery-container img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+/* ================== ABOUT TEXT ================== */
+.about-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #4b5563;
+    margin-bottom: 35px;
+}
+
+/* ================== DIVIDER ================== */
+.divider {
+    height: 1px;
+    background: #e5e7eb;
+    margin: 30px 0;
+}
+
+/* ================== REVIEWS ================== */
+.reviews-section {
+    margin-top: 20px;
+}
+
+.rating-label {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+/* ================== STAR RATING ================== */
+.star-rating {
+    display: flex;
+    gap: 8px;
+    font-size: 28px;
+    color: #cbd5e1;
+    cursor: pointer;
+    margin-bottom: 25px;
+}
+
+.star-rating span:hover,
+.star-rating span.active {
+    color: #f59e0b;
+}
+
+/* ================== REVIEW BOX ================== */
+.review-label {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+#review-box {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    resize: none;
+    outline: none;
+}
+
+#review-box::placeholder {
+    color: #9ca3af;
+}
+
+#review-box:focus {
+    border-color: #22b8c5;
+    box-shadow: 0 0 0 2px rgba(34, 184, 197, 0.2);
+}
+
+/* ================== SUBMIT BUTTON ================== */
+#submit-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #22b8c5;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#submit-btn:hover {
+    background: #1aa3af;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 768px) {
+    .destination-container {
+        padding: 25px;
+    }
+
+    .destination-title {
+        font-size: 30px;
+    }
+}
+
+.hr-style {
+    height: 1px; /* Thickness of the line */
+    background-color: #9390904d; /* Background color */
+    border: none; /* Remove default border */
+}
+
+.itinerary-btn-container{
+    margin:20px 0;
+}
+
+#addToItineraryBtn{
+    background-color:#458be7;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    font-size:16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#addToItineraryBtn:hover{
+    background-color:#1a5fd1;
+}

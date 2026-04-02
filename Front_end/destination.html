@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compass LK – Destinations</title>
+    <link rel="stylesheet" href="destination_styles.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        
+       <a href="Landing_page.html" class="logo">
+
+            <img src="src/logo.png" width="34" />Compass LK
+        </a>
+
+        <nav>
+            <a href="destination.html">Destinations</a>
+            <a href="Calendar.html">Calendar</a>
+            <a href="Landing_page.html#how-to-use">Help</a>
+            <a href="itinerary.html" id="myItinerary" style="display:none;">My Itinerary</a></li>
+        </nav>
+
+        <div class="auth-section">
+            <button class="btn sign-in" onclick="window.location.href='login.html'">Sign In</button>
+            <button class="btn get-started" onclick="window.location.href='signup.html'">Get Started</button>
+
+        </div>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero">
+        <h1>Explore <span class="highlight">Sri Lanka</span></h1>
+        <p>Discover amazing destinations across all provinces</p>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search destinations...">
+        </div>
+    </section>
+
+    <!-- ================= FILTER BY PROVINCE ================= -->
+    <section class="filter-section">
+        <h2>Filter by Province</h2>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Provinces</button>
+            <button class="filter-btn" data-filter="Central">Central</button>
+            <button class="filter-btn" data-filter="Eastern">Eastern</button>
+            <button class="filter-btn" data-filter="North Central">North Central</button>
+            <button class="filter-btn" data-filter="North Western">North Western</button>
+            <button class="filter-btn" data-filter="Northern">Northern</button>
+            <button class="filter-btn" data-filter="Sabaragamuwa">Sabaragamuwa</button>
+            <button class="filter-btn" data-filter="Southern">Southern</button>
+            <button class="filter-btn" data-filter="Uva">Uva</button>
+            <button class="filter-btn" data-filter="Western">Western</button>
+        </div>
+    </section>
+
+    <!-- ================= DESTINATION CARDS ================= -->
+    <section class="destinations-grid" id="destinationsContainer">
+
+        <!-- CARD 1 -->
+         
+        <div class="card" data-province="North Central" data-id="abhayagiri" onclick="openDestination('abhayagiri')">
+            <img src="src/North Central/Abhayagiri Stupa.JPG">
+            <h3>Abhayagiri Stupa</h3>
+            <p class="province">North Central</p>
+        </div>
+         
+
+        <!-- CARD 2 -->
+        <div class="card" data-province="Sabaragamuwa" data-id="adams_peak" onclick="openDestination('adams_peak')">
+            <img src="src/Sabaragamuwa Province/Adam’s Peak (Sri Pada).webp">
+            <h3>Adam's Peak (Sri Pada)</h3>
+            <p class="province">Sabaragamuwa</p>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card" data-province="Northern" data-id="adams_bridge" onclick="openDestination('adams_bridge')">
+            <img src="src/Northern Province/Adams Bridge.jpeg">
+            <h3>Adams Bridge / Rama's Bridge</h3>
+            <p class="province">Northern</p>
+        </div>
+
+         <!-- CARD 3 -->
+        <div class="card" data-province="Central" data_id="aluvihare_temple" onclick="openDestination('aluvihare_temple')">
+            <img src="src/Central Province/aluvihare rock temple.jpg">
+            <h3>Aluvihare Temple</h3>
+            <p class="province">Central</p>
+        </div>
+        
+        <div class="card" data-province="Central" data-id="ambuluwawa_tower" onclick="openDestination('ambuluwawa_tower')">
+            <img src="src/Central Province/Ambuluwawa Tower.jpg">
+            <h3>Ambuluwawa Tour</h3>
+            <p class="province">Central</p>
+        </div>
+
+        <div class="card" data-province="North Central" data-id="anuradhapura_sacred_city" onclick="openDestination('anuradhapura_sacred_city')">
+            <img src="src/North Central Province/Anuradhapura Sacred City.jpg">
+            <h3>Anuradhapura Sacred City</h3>
+            <p class="province">North Central</p>
+        </div>      
+
+        <div class="card" data-province="Southern" data-id="angurukaramulla_temple" onclick="openDestination('angurukaramulla_temple')">
+            <img src="src/Southern Province/Angurukaramulla Temple.jpeg">
+            <h3>Angurukaramulla Temple</h3>
+            <p class="province">Southern</p>
+        </div>
+       
+        
+        <div class="card" data-province="Eastern" data-id="arugam_bay" onclick="openDestination('arugam_bay')">
+            <img src="src/Eastern Province/Arugam Bay.jpeg">
+            <h3>Arugam Bay</h3>
+            <p class="province">Eastern</p>
+        </div>
+
+        <div class="card" data-province="North Western" data-id="athugala_elephant_rock" onclick="openDestination('athugala_elephant_rock')">
+            <img src="src/North Western Province/Athugala (Elephant Rock).jpeg">
+            <h3>Athugala (Elephant Rock)</h3>
+            <p class="province">North Western</p>
+        </div>
+        
+        <div class="card" data-province="Western" data-id="attidiya_bird_sanctuary" onclick="openDestination('attidiya_bird_sanctuary')">
+            <img src="src/Western Province/Attidiya Bird Sanctuary.jpg">
+            <h3>Attidiya Bird Sanctuary</h3>
+            <p class="province">Western</p>
+        </div>
+
+         <div class="card" data-province="North Central" data-id="avukana_buddha_statue" onclick="openDestination('avukana_buddha_statue')">
+            <img src="src/North Central Province/Avukana Buddha Statue.jpeg">
+            <h3>Avukana Buddha Statue</h3>
+            <p class="province">North Central</p>
+        </div>
+
+        <div class="card" data-province="Sabaragamuwa" data-id="balangoda_caves" onclick="openDestination('balangoda_caves')">
+            <img src="src/Sabaragamuwa Province/Balangoda Caves (Fa Hien Cave nearby).webp">
+            <h3>Balangoda Caves(Fa Hien Cave)</h3>
+            <p class="province">Sabaragamuwa</p>
+        </div>    
+      
+       <div class="card" data-province="Central" data-id="bambarakiri_ella" onclick="openDestination('bambarakiri_ella')">
+            <img src="src/Central Province/Bambarakiri Ella.jpeg">
+            <h3>Bambarakiri Ella</h3>
+            <p class="province">Central</p>
+        </div>
+          
+        <div class="card" data-province="Eastern"  data-id="batticaloa_fort" onclick="openDestination('batticaloa_fort')">
+            <img src="src/Eastern Province/Batticaloa Fort.webp">
+            <h3>Batticaloa Fort</h3>
+            <p class="province">Eastern</p>
+        </div>
+
+        <div class="card" data-province="Western" data-id="beddagana_wetland_park" onclick="openDestination('beddagana_wetland_park')">
+            <img src="src/Western Province/Beddagana Wetland Park.jpg">
+            <h3>Beddagana Wetland Park</h3>
+            <p class="province">Western</p>
+        </div>
+
+        <div class="card" data-province="Uva" data-id="ella_rock" onclick="openDestination('ella_rock')">
+            <img src="src/Uva Province/Ella Rock.jpeg">
+            <h3>Ella Rock</h3>
+            <p class="province">Uva</p>
+        </div>
+
+    </section>
+
+    <script src="destination.js"></script>
+    <script src="Script.js"></script>
+</body>
+</html>

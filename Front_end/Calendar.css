@@ -1,0 +1,249 @@
+
+
+:root {
+    --primary: #18b3a6;
+    --bg: #faf8f4;
+    --card: #ffffff;
+    --border: #e6e2da;
+    --text: #1f2937;
+    --muted: #6b7280;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+body {
+    margin: 0;
+    background: linear-gradient(#daf5d5,#79eea8);
+    color: var(--text);
+}
+
+/* ===== NAVBAR ===== */
+.logo {
+            font-family: 'Calibri', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 42px;
+            font-weight: 1000;
+            color: #1dcc63;
+            text-decoration: none;
+        }
+
+nav {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 50px;
+}
+
+nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #000000;
+            font-size: 16px;
+        }
+        
+.btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+.sign-in {
+            background: #2ecc71;
+            border: 1px solid #fff;
+            color: #fff;
+        }
+
+.get-started {
+            background: #2ecc71;
+            color: #fff;
+        }
+
+
+
+
+/* ===== PAGE HEADER ===== */
+.container {
+    padding: 40px;
+}
+
+header {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+        }
+
+
+.header2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header2 h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+.subtitle {
+    color: var(--muted);
+}
+
+/* ===== FILTERS ===== */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.filter-pill {
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.filter-pill.active {
+    background: #e6f7f5;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* ===== YEAR SELECT ===== */
+.year-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.year-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    cursor: pointer;
+}
+
+.select {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--primary);
+    background: #fff;
+}
+
+/* ===== CALENDAR GRID ===== */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+/* ===== MONTH CARD ===== */
+.month-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 20px;
+    border: 1px solid var(--border);
+}
+
+.month-title {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.weekdays, .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.weekdays div {
+    color: var(--muted);
+}
+
+.day {
+    padding: 8px 0;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    font-size: 13px;
+}
+
+.empty {
+    border: none;
+    background: transparent;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 14px 20px;
+    }
+    .container {
+        padding: 20px;
+    }
+}
+
+/* ===== EVENT DAY ===== */
+.event-day {
+    background: #18b3a6;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ===== MODAL ===== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    width: 350px;
+    position: relative;
+    animation: pop 0.3s ease;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.auth-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+

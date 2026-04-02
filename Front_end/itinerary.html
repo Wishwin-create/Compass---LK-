@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Compass LK</title>
+    
+    <link rel="stylesheet" href="itinerary.css" />
+    
+    
+</head>
+<body>
+    
+    <header>
+        <a href="destination.html" class="logo">
+        <img src="src/logo.png" width="34">
+        Compass LK
+        </a>
+        <nav>
+            <a href="destination.html" >Destinations</a>
+            <a href="Calendar.html" data-page="Calender">Calendar</a>
+            <a href="Landing_page.html#how-to-use" class="help-btn" >Help</a>
+            <a href="itinerary.html" id="myItinerary" style="display:none;">My Itinerary</a>
+        
+        </nav>
+        <div class="auth-section">
+            <button class="btn sign-in" onclick="window.location.href='login.html'">Sign In</button>
+            <button class="btn get-started" onclick="window.location.href='signup.html'">Get Started</button>
+
+        </div>
+    </header>
+
+
+    <div class = "itinerary-container">
+       
+
+    <a href="destination.html" class="btn back-btn">⬅ Back to Destinations</a>
+
+    <h1>My Itinerary</h1>
+    <p class="subtitle">Plan and organize your travel destinations</p>
+    <div>
+            <br>
+            <p>Start building your itinerary by adding destinations to your trip</p>
+            <br>
+            
+        </div>
+
+  <br>
+  <br>
+
+    <!-- Destination List -->
+    <h2>Your Destinations</h2>
+    <br>
+    <br>
+
+    <div id="destinationList" class="destination-list">
+
+        <div class="empty">
+            <h3>No destinations yet</h3>
+            <p>Start building your itinerary by adding destinations to your trip</p>
+            <button class="btn destination-btn" onclick="window.location.href='destination.html'">Select your Destination First</button>
+        </div>
+
+    </div>
+
+
+  
+
+    <!-- Modal for planning step -->
+<div id="planModal" class="modal">
+  <div class="modal-content">
+
+    <span class="close">&times;</span>
+
+    <h2 id="modal-destination-title">Plan Your Trip</h2>
+
+    <label class="modal-label">Visit Date</label>
+    <input type="date" id="plan-date">
+
+    <label class="modal-label">Time</label>
+    <input type="time" id="plan-time">
+
+    <label class="modal-label">Activity</label>
+    <input type="text" id="plan-activity" placeholder="What will you do?">
+
+    <label class="modal-label">Duration</label>
+    <input type="text" id="plan-duration" placeholder="Example: 2 hours">
+
+    <label class="modal-label">Transport</label>
+    <select id="plan-transport" class="modal-label">
+        <option>Car</option>
+        <option>Bus</option>
+        <option>Train</option>
+        <option>Walk</option>
+    </select>
+
+    <label class="modal-label">Notes</label>
+    <textarea id="plan-notes"></textarea>
+    <br>
+
+    <button id="savePlanBtn">Save Plan</button>
+
+  </div>
+</div>
+<div id ="viewModal" class="modal">
+    <div class = "modal-content">
+        <span class="close">&times;</span>
+        <h2 id ="view-title"></h2>
+         <p><strong>Date:</strong> <span id="view-date"></span></p>
+         <p><strong>Time:</strong> <span id="view-time"></span></p>
+         <p><strong>Activity:</strong> <span id="view-activity"></span></p>
+        <p><strong>Duration:</strong> <span id="view-duration"></span></p>
+        <p><strong>Transport:</strong> <span id="view-transport"></span></p>
+        <p><strong>Notes:</strong> <span id="view-notes"></span></p>
+    </div>
+</div>
+
+<script src="itinerary.js"></script>
+<script src="Script.js"></script>
+
+</body>
+</html>
+
+
+
+
+    

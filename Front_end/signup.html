@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compass LK - Sign Up</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <div class="logo">
+            <img src="src/logo.png" width="34" /> Compass LK
+        </div>
+        <br>
+    <h2>Start Your Journey</h2>
+    <p class="subtitle">Create an account to start planning your adventure</p>
+
+    <form id="signupForm">
+        <label class="auth-label">Full Name :</label>
+        <input type="text" id="name" placeholder="Enter your full Name" required>
+        <label class="auth-label">Email :</label>
+        <input type="email" id="email" placeholder="Enter your Email address" required>
+         <label class="auth-label">Password :</label>
+        <input type="password" id="password" placeholder="Enter your password(min 6 characters)" required>
+        <button type="submit">Create Account</button>
+        <div id="message"></div>
+
+        <p class="switch-text">
+            Already have an account?  
+            <a href="login.html" class="link">Sign In</a>
+        </p>
+    </form>
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>
