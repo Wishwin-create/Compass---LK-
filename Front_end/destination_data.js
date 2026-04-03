@@ -5,8 +5,8 @@ const DESTINATIONS = {
         topImage: "src/North Central/Abhayagiri Stupa.JPG",
         gallery: [
             "src/North Central/Abhayagiri Stupa.JPG",
-            "src/North Central/Abhayagiri 2.jpg",
-            "src/North Central/Abhayagiri 3.jpg"
+            "src/North Central/Abhayagiri 2.webp",
+            "src/North Central/abhayagiri-3.jpg"
         ],
         reviews: [
             "A must-visit place for history lovers!",
