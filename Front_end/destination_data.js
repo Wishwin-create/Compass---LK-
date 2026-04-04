@@ -98,8 +98,8 @@ const DESTINATIONS = {
         topImage: "src/Southern Province/Angurukaramulla Temple.jpeg",
         gallery: [
             "src/Southern Province/Angurukaramulla Temple.jpeg",
-            "src/Southern Province/angurukaramulla_temple_2.jpg",
-            "src/Southern Province/angurukaramulla_temple_3.jpg"
+            "src/Southern Province/Angurukaramulla Temple-2.webp",
+            "src/Southern Province/Angurukaramulla Temple-3.webp"
         ],
         reviews: [
             "A beautiful temple with stunning murals.",
@@ -113,8 +113,8 @@ const DESTINATIONS = {
         topImage: "src/Eastern Province/Arugam Bay.jpeg",
         gallery: [
             "src/Eastern Province/Arugam Bay.jpeg",
-            "src/Eastern Province/arugam_bay_2.jpg",
-            "src/Eastern Province/arugam_bay_3.jpg"
+            "src/Eastern Province/Arugam Bay-2.jpeg",
+            "src/Eastern Province/Elephant Rock (Arugam Bay).webp"
         ],
         reviews: [
             "Amazing waves for surfing!",
@@ -129,8 +129,8 @@ const DESTINATIONS = {
         topImage: "src/North Western Province/Athugala (Elephant Rock).jpeg",
         gallery: [
             "src/North Western Province/Athugala (Elephant Rock).jpeg",
-            "src/North Western Province/athugala_elephant_rock_2.jpg",
-            "src/North Western Province/athugala_elephant_rock_3.jpg"
+            "src/North Western Province/Athugala (Elephant Rock)-2.webp",
+            "src/North Western Province/Athugala (Elephant Rock)-3.webp"
         ],
         reviews: [
             "A fun hike with rewarding views.",
@@ -145,8 +145,8 @@ const DESTINATIONS = {
         topImage: "src/Western Province/Attidiya Bird Sanctuary.jpg",
         gallery: [
             "src/Western Province/Attidiya Bird Sanctuary.jpg",
-            "src/Western Province/attidiya_bird_sanctuary_2.jpg",
-            "src/Western Province/attidiya_bird_sanctuary_3.jpg"
+            "src/Western Province/Attidiya Bird Sanctuary-2.webp",
+            "src/Western Province/Attidiya Bird Sanctuary-3.webp"
         ],
         reviews: [
             "A paradise for birdwatchers!",
@@ -161,8 +161,8 @@ const DESTINATIONS = {
         topImage: "src/North Central Province/Avukana Buddha Statue.jpeg",  
         gallery: [
             "src/North Central Province/Avukana Buddha Statue.jpeg",
-            "src/North Central Province/avukana_buddha_statue_2.jpg",
-            "src/North Central Province/avukana_buddha_statue_3.jpg"
+            "src/North Central Province/Avukana Buddha Statue-2.webp",
+            "src/North Central Province/Avukana Buddha Statue-3.webp"
         ],
         reviews: [
             "An impressive feat of ancient craftsmanship.",
@@ -175,9 +175,9 @@ const DESTINATIONS = {
         about: "Balangoda Caves, also known as Fa Hien Cave, is a significant archaeological site located in the Sabaragamuwa Province of Sri Lanka. It is renowned for its prehistoric cave paintings and artifacts that provide valuable insights into the island's ancient human history.", 
         topImage: "src/Sabaragamuwa Province/Balangoda Caves (Fa Hien Cave nearby).webp",  
         gallery: [  
-            "src/Sabaragamuwa Province/Balangoda Caves (Fa Hien Cave).webp",
-            "src/Sabaragamuwa Province/balangoda_caves_2.jpg",
-            "src/Sabaragamuwa Province/balangoda_caves_3.jpg"
+            "src/Sabaragamuwa Province/Balangoda Caves (Fa Hien Cave nearby).webp",
+            "src/Sabaragamuwa Province/Balangoda Caves (Fa Hien Cave nearby)-2.webp",
+            "src/Sabaragamuwa Province/Balangoda Caves (Fa Hien Cave nearby)-3.webp"
         ],
         reviews: [
             "A fascinating glimpse into prehistoric times.",

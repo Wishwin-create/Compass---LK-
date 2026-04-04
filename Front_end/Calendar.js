@@ -70,7 +70,7 @@ const events ={
 
 
 
-let currentYear = 2025;
+let currentYear = 2026;
 let activeFilter ="Cultural";
 
 
@@ -126,6 +126,7 @@ function changeYear(step) {
     yearEl.textContent = currentYear;
     renderCalendar(currentYear);
 }
+yearEl.textContent = currentYear; 
 
 renderCalendar(currentYear);
 
