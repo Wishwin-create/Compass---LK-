@@ -20,9 +20,9 @@ const DESTINATIONS = {
         about: "Adam's Peak is a sacred mountain famous for its sunrise hike.",
         topImage: "src/Sabaragamuwa Province/Adam’s Peak (Sri Pada).webp",
         gallery: [
-            "img/adams1.jpg",
-            "img/adams2.jpg",
-            "img/adams3.jpg"
+            "src/Sabaragamuwa Province/Adam’s Peak (Sri Pada).webp",
+            "src/Sabaragamuwa Province/adams-peak_srilanka.jpg",
+            "src/Sabaragamuwa Province/adams-peak-2.jpg"
         ],
         reviews: [
             "The sunrise was amazing!",
@@ -36,8 +36,9 @@ const DESTINATIONS = {
         about: "A natural limestone shoal between Sri Lanka and India.",
         topImage: "src/Northern Province/Adams Bridge.jpeg",
         gallery: [
-            "img/bridge1.jpg",
-            "img/bridge2.jpg"
+            "src/Northern Province/Adams Bridge.jpeg",
+            "src/Northern Province/adam_bridge-2.jpg",
+            "src/Northern Province/adam_bridge-3.jpg"
         ],
         reviews: [
             "Beautiful ocean view.",
@@ -51,8 +52,8 @@ const DESTINATIONS = {
         topImage: "src/Central Province/aluvihare rock temple.jpg",
         gallery: [
             "src/Central Province/aluvihare rock temple.jpg",
-            "src/Central Province/aluvihare_temple_2.jpg",
-            "src/Central Province/aluvihare_temple_3.jpg"
+            "src/Central Province/aluvihare rock temple-2.jpg",
+            "src/Central Province/Aluvihare Temple.JPG"
         ],
         reviews: [
             "A serene place with rich history.",
@@ -66,8 +67,8 @@ const DESTINATIONS = {
         topImage: "src/Central Province/Ambuluwawa Tower.jpg",
         gallery: [
             "src/Central Province/Ambuluwawa Tower.jpg",
-            "src/Central Province/ambuluwawa_tower_2.jpg",
-            "src/Central Province/ambuluwawa_tower_3.jpg"
+            "src/Central Province/Ambuluwawa Tower-2.jpg",
+            "src/Central Province/Ambuluwawa Tower-3.jpg"
         ],
         reviews: [
             "A beautiful place promoting peace and unity.",
@@ -82,8 +83,8 @@ const DESTINATIONS = {
         topImage: "src/North Central Province/Anuradhapura Sacred City.jpg",
         gallery: [
             "src/North Central Province/Anuradhapura Sacred City.jpg",
-            "src/North Central Province/anuradhapura_sacred_city_2.jpg",
-            "src/North Central Province/anuradhapura_sacred_city_3.jpg"
+            "src/North Central Province/Anuradhapura Sacred City-2.jpg",
+            "src/North Central Province/Anuradhapura Sacred City-3.jpg"
         ],
         reviews: [
             "A fascinating glimpse into ancient history.",
