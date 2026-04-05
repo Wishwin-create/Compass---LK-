@@ -191,8 +191,8 @@ const DESTINATIONS = {
         topImage: "src/Central Province/Bambarakiri Ella.jpeg", 
         gallery: [
             "src/Central Province/Bambarakiri Ella.jpeg",
-            "src/Central Province/bambarakiri_ella_2.jpg",
-            "src/Central Province/bambarakiri_ella_3.jpg"
+            "src/Central Province/Bambarakiri Ella-2.webp",
+            "src/Central Province/Bambarakiri Ella-3.webp"
         ],
         reviews: [
             "A breathtaking view of the waterfall.",
@@ -206,8 +206,8 @@ const DESTINATIONS = {
         topImage: "src/Eastern Province/Batticaloa Fort.webp",
         gallery: [
             "src/Eastern Province/Batticaloa Fort.webp",
-            "src/Eastern Province/batticaloa_fort_2.jpg",
-            "src/Eastern Province/batticaloa_fort_3.jpg"
+            "src/Eastern Province/Batticaloa Fort-2.webp",
+            "src/Eastern Province/Batticaloa Fort-3.webp"
         ],
         reviews: [
             "A well-preserved historical site.",
@@ -221,8 +221,8 @@ const DESTINATIONS = {
         topImage: "src/Western Province/Beddagana Wetland Park.jpg",
         gallery: [
             "src/Western Province/Beddagana Wetland Park.jpg",
-            "src/Western Province/beddagana_wetland_park_2.jpg",
-            "src/Western Province/beddagana_wetland_park_3.jpg"
+            "src/Western Province/Beddagana Wetland Park-2.webp",
+            "src/Western Province/Beddagana Wetland Park-3.webp"
         ],
         reviews: [
             "A serene environment perfect for birdwatching.",
@@ -236,8 +236,8 @@ const DESTINATIONS = {
         topImage: "src/Uva Province/Ella Rock.jpeg",
         gallery: [
             "src/Uva Province/Ella Rock.jpeg",
-            "src/Uva Province/ella_rock_2.jpg",
-            "src/Uva Province/ella_rock_3.jpg"
+            "src/Uva Province/Ella Rock-2.webp",
+            "src/Uva Province/Ella Rock -3.webp"
         ],
         reviews: [
             "The views from the top are absolutely stunning!",
