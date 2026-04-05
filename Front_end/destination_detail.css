@@ -233,3 +233,26 @@ body {
 #addToItineraryBtn:hover{
     background-color:#1a5fd1;
 }
+
+/* ===== RESPONSIVE STYLES ===== */
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .icon-circle {
+        margin: 0 auto;
+    }
+}
