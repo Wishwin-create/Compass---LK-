@@ -27,13 +27,29 @@ function createDefaultPlan(plan = {}) {
     };
 }
 
-function getItineraryList() {
-    return JSON.parse(localStorage.getItem("myItinerary")) || [];
+function normalizeItineraryItem(item = {}) {
+    return {
+        ...item,
+        plan: createDefaultPlan(item.plan || item)
+    };
 }
 
-function saveItineraryList(itineraryList) {
-    localStorage.setItem("myItinerary", JSON.stringify(itineraryList));
+async function getItineraryList() {
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+        return [];
+    }
+
+    const res = await fetch(`http://localhost:3000/itinerary/${userId}`);
+    if (!res.ok) {
+        throw new Error("Failed to fetch itinerary");
+    }
+
+    const data = await res.json();
+    return Array.isArray(data) ? data.map(normalizeItineraryItem) : [];
 }
+
 
 function resetPlanForm() {
     planDateInput.value = "";
@@ -42,7 +58,7 @@ function resetPlanForm() {
     planDurationInput.value = "";
     planTransportInput.value = "Car";
     planNotesInput.value = "";
-    planModal.removeAttribute("data-edit-index");
+    planModal.removeAttribute("data-edit-id");
 }
 
 function populatePlanForm(dest, index) {
@@ -57,28 +73,39 @@ function populatePlanForm(dest, index) {
     planNotesInput.value = plan.notes !== "No notes" ? plan.notes : "";
 
     modalTitle.textContent = `Edit: ${dest.title}`;
-    planModal.setAttribute("data-edit-index", index);
+    planModal.setAttribute("data-edit-id", index);
     planModal.classList.add("show");
 }
 
-function refreshDestinations() {
-    const itineraryList = getItineraryList();
+async function refreshDestinations() {
     destinationList.innerHTML = "";
 
-    itineraryList.forEach((dest, index) => addDestinationThumbnail(dest, index));
+    try {
+        const itineraryList = await getItineraryList();
 
-    if (itineraryList.length === 0) {
+        itineraryList.forEach((dest) => addDestinationThumbnail(dest, dest.id));
+
+        if (itineraryList.length === 0) {
+            destinationList.innerHTML = `
+                <div class="empty">
+                    <h3>No destinations yet</h3>
+                    <p>Start building your itinerary by adding destinations to your trip</p>
+                    <button class="btn destination-btn" onclick="window.location.href='destination.html'">Select your Destination First</button>
+                </div>
+            `;
+        }
+    } catch (error) {
         destinationList.innerHTML = `
             <div class="empty">
-                <h3>No destinations yet</h3>
-                <p>Start building your itinerary by adding destinations to your trip</p>
-                <button class="btn destination-btn" onclick="window.location.href='destination.html'">Select your Destination First</button>
+                <h3>Unable to load itinerary</h3>
+                <p>Please make sure you are logged in and the backend server is running.</p>
             </div>
         `;
+        console.error(error);
     }
 }
 
-function openViewModal(dest, index) {
+function openViewModal(dest,id) {
     const plan = createDefaultPlan(dest.plan);
 
     document.getElementById("view-title").textContent = dest.title;
@@ -110,18 +137,16 @@ function openViewModal(dest, index) {
 
     editBtn.onclick = (e) => {
         e.stopPropagation();
-        populatePlanForm(dest, index);
+        populatePlanForm(dest, dest.id);
         viewModal.classList.remove("show");
     };
 
-    deleteBtn.onclick = (e) => {
+    deleteBtn.onclick = async (e) => {
         e.stopPropagation();
-        const itineraryList = getItineraryList();
-
-        if (!confirm("Are you sure you want to delete this destination?")) return;
-
-        itineraryList.splice(index, 1);
-        saveItineraryList(itineraryList);
+        await fetch(`http://localhost:3000/itinerary/${id}`, {
+        method: "DELETE"
+});
+        
         refreshDestinations();
         viewModal.classList.remove("show");
     };
@@ -144,7 +169,7 @@ closeModal.onclick = () => {
 };
 
 // Save Plan
-savePlanBtn.addEventListener("click", () => {
+savePlanBtn.addEventListener("click", async() => {
     if (!selectedDestination) return;
 
     const updatedPlan = createDefaultPlan({
@@ -156,20 +181,29 @@ savePlanBtn.addEventListener("click", () => {
         notes: planNotesInput.value.trim()
     });
 
-    const itineraryList = getItineraryList();
-    const editIndex = planModal.getAttribute("data-edit-index");
+    const editId = planModal.getAttribute("data-edit-id");
 
-    if (editIndex !== null) {
-        itineraryList[Number(editIndex)] = {
-            ...itineraryList[Number(editIndex)],
-            plan: updatedPlan
-        };
+    if (editId) {
+        // UPDATE
+        await fetch(`http://localhost:3000/itinerary/${editId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedPlan)
+        });
     } else {
-        selectedDestination.plan = updatedPlan;
-        itineraryList.push(selectedDestination);
+        // ADD
+        await fetch("http://localhost:3000/itinerary", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                user_id: localStorage.getItem("userId"),
+                title: selectedDestination.title,
+                ...updatedPlan
+            })
+        });
     }
 
-    saveItineraryList(itineraryList);
+   
     refreshDestinations();
     resetPlanForm();
     planModal.classList.remove("show");
@@ -177,7 +211,7 @@ savePlanBtn.addEventListener("click", () => {
 });
 
 // Add destination thumbnail
-function addDestinationThumbnail(dest, index) {
+function addDestinationThumbnail(dest, id) {
     const plan = createDefaultPlan(dest.plan);
     const card = document.createElement("div");
 
@@ -196,25 +230,22 @@ function addDestinationThumbnail(dest, index) {
     if (editBtn) {
         editBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            populatePlanForm(dest, index);
+            populatePlanForm(dest, id);
         });
     }
 
     if (deleteBtn) {
-        deleteBtn.addEventListener("click", (e) => {
+        deleteBtn.addEventListener("click", async(e) => {
             e.stopPropagation();
-            const itineraryList = getItineraryList();
-
-            if (!confirm("Are you sure you want to delete this destination?")) return;
-
-            itineraryList.splice(index, 1);
-            saveItineraryList(itineraryList);
-            refreshDestinations();
+            await fetch(`http://localhost:3000/itinerary/${dest.id}`, {
+            method: "DELETE"
+    });
+    refreshDestinations();
         });
     }
 
     card.addEventListener("click", () => {
-        openViewModal(dest, index);
+        openViewModal(dest, dest.id);
     });
 
     destinationList.appendChild(card);
@@ -226,7 +257,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // Manual Add Destination
-document.getElementById("addDestination")?.addEventListener("click", () => {
+document.getElementById("addDestination")?.addEventListener("click", async() => {
     const name = document.getElementById("destinationName").value.trim();
     const time = document.getElementById("visitTime").value;
     const note = document.getElementById("destinationNote").value.trim();
@@ -245,9 +276,15 @@ document.getElementById("addDestination")?.addEventListener("click", () => {
         })
     };
 
-    const itineraryList = getItineraryList();
-    itineraryList.push(dest);
-    saveItineraryList(itineraryList);
+    await fetch("http://localhost:3000/itinerary", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        user_id: localStorage.getItem("userId"),
+        title: dest.title,
+        ...dest.plan
+    })
+});
     refreshDestinations();
 
     document.getElementById("destinationName").value = "";

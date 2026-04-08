@@ -185,3 +185,109 @@ app.post("/update-profile", async (req, res) => {
 app.listen(3000, () => {
     console.log("Server running on http://localhost:3000");
 });
+
+
+//Get User Itinerary
+app.get("/itinerary/:user_id", (req, res) => {
+    const user_id = req.params.user_id;
+
+    const sql ="SELECT * FROM itinerary WHERE user_id = ? ORDER BY id DESC";
+    db.query(sql, [user_id], (err, results) => {
+        if (err) {
+            console.log("Database error:", err);
+            return res.status(500).json({ message: "Error fetching itinerary" });
+        }
+        res.json(results);
+    });
+});
+
+//Add Destination
+
+app.post("/itinerary", (req, res) => {
+      const {
+        user_id,
+        title,
+        date,
+        time,
+        activity,
+        duration,
+        transport,
+        notes
+    } = req.body;
+
+    if (!user_id || !title) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
+     const sql = `
+        INSERT INTO itinerary 
+        (user_id, title, date, time, activity, duration, transport, notes)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+      db.query(sql, [
+        user_id,
+        title,
+        date,
+        time,
+        activity,
+        duration,
+        transport,
+        notes
+    ], (err) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({ message: "Error adding itinerary" });
+        }
+
+        res.json({ message: "Destination added successfully" });
+    });
+});
+
+
+//Update Itinerary
+app.put("/itinerary/:id", (req, res) => {
+     const id = req.params.id;
+     const {
+        date,
+        time,
+        activity,
+        duration,
+        transport,
+        notes
+    } = req.body;
+
+    const sql = `
+        UPDATE itinerary 
+        SET date=?, time=?, activity=?, duration=?, transport=?, notes=?
+        WHERE id=?
+    `;
+
+    db.query(sql, [
+        date,
+        time,
+        activity,
+        duration,
+        transport,
+        notes,
+        id
+    ], (err) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({ message: "Error updating itinerary" });
+        }
+
+        res.json({ message: "Updated successfully" });
+    });
+});
+
+//Delete Itinerary
+app.delete("/itinerary/:id", (req, res) => {
+    const id = req.params.id;
+    const sql = "DELETE FROM itinerary WHERE id=?";
+    db.query(sql, [id], (err) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({ message: "Error deleting itinerary" });
+        }
+        res.json({ message: "Deleted successfully" });
+    });
+});
