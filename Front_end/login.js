@@ -42,6 +42,15 @@ form.addEventListener("submit", async (e) => {
             localStorage.setItem("userEmail", data.email);
             localStorage.setItem("userId", data.userID);       // optional, if your backend sends an id
             localStorage.setItem("userInterests", JSON.stringify(data.interests || [])); // Save interests as JSON string
+           
+        const imageUrl = data.profilePic 
+            ? `http://localhost:3000/uploads/${data.profilePic}`
+           : 'src/profile.avif';
+
+    localStorage.setItem("profilePic", imageUrl);
+
+    console.log("Saved profilePic:", imageUrl);
+
             
             console.log("Login response:", data);
             console.log("Saved userID:", localStorage.getItem("userId"));

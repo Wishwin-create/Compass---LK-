@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./db");
 const bcrypt = require("bcryptjs");
+const multer = require("multer");
+const path = require("path");
 
 
 const app = express();
@@ -102,11 +104,33 @@ app.post("/login", (req, res) => {
             userID: user.id,
             name: user.name,
             email: user.email,
-            interests: interests
+            interests: interests,
+            profilePic: user.profile_pic
         });
     });
 });
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ 
+    storage,
+    limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
+    fileFilter: (req, file, cb) => {
+        const allowed = ["image/jpeg", "image/png", "image/jpg"];
+        if (allowed.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error("Only images are allowed"));
+        }
+    }
+});
 
 //Add review route
 app.post("/add-review", (req, res) => {
@@ -152,35 +176,68 @@ app.get("/reviews/:destination_id", (req, res) => {
     });
 });
 
-app.post("/update-profile", async (req, res) => {
-    const { userId, name, email, newPassword, interests} = req.body;
-
-    if (!userId || !name || !email){
-        return res.status(400).json({ message: "Missing required fields" });
+app.post("/update-profile", upload.single("profileImage"), async(req, res) => {
+    const { userId,name, email, newPassword ,interests } = req.body;
+    const parsedInterests = interests ? JSON.parse(interests) : [];
+    let profilePicPath = null;
+    if (!userId || !name || !email) {
+    return res.status(400).json({ message: "Missing required fields" });
+}
+    if (req.file) {
+        profilePicPath = req.file.filename;
     }
 
-    try {
-        let sql,params;
+    try{
+        let sql, params;
+       
         if (newPassword) {
             const hashedPassword = await bcrypt.hash(newPassword, 10);
-            sql = "UPDATE users SET name = ?, email = ?, password = ?, interests = ? WHERE id = ?";
-            params = [name, email, hashedPassword,JSON.stringify(interests || []), userId];
+
+            sql = `
+                UPDATE users 
+                SET name=?, email=?, password=?, interests=?, profile_pic=COALESCE(?, profile_pic)
+                WHERE id=?
+            `;
+
+            params = [
+                name,
+                email,
+                hashedPassword,
+                JSON.stringify(parsedInterests),
+                profilePicPath,
+                userId
+            ];
         } else {
-            sql = "UPDATE users SET name = ?, email = ?, interests = ? WHERE id = ?";
-            params = [name, email, JSON.stringify(interests || []), userId];
-        }
-        db.query(sql,params, (err) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).json({ message: "Error updating profile" });
+             sql = `
+                UPDATE users 
+                SET name=?, email=?, interests=?, profile_pic=COALESCE(?, profile_pic)
+                WHERE id=?
+            `;
+            params = [
+                name,
+                email,
+                JSON.stringify(parsedInterests),
+                profilePicPath,
+                userId
+            ];
             }
-            res.json({ message: "Profile updated successfully" });
+        db.query(sql, params, (err) => {
+
+            if (err)  {
+                return res.status(500).json({ message: "Database error" });
+            }
+            res.json({ message: "Profile updated successfully" ,
+            profilePic : profilePicPath
+            });
         });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: "Server error" });
-    }   
+        }catch (error) {
+            console.log("Error in update-profile route:", error);
+            res.status(500).json({ message: "Server error" });
+        }
 });
+         
+    
+app.use("/uploads", express.static("uploads"));
 // Start server
 app.listen(3000, () => {
     console.log("Server running on http://localhost:3000");

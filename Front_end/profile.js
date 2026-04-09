@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Load existing profile data from localStorage
     email.value = localStorage.getItem('userEmail') || '';
     fullname.value = localStorage.getItem('userName') || '';
-    password.value = localStorage.getItem('userPassword') || '';
+    
     profileImage.src = localStorage.getItem('profilePic') || 'src/profile.avif'; 
 
     // Load interests from localStorage
@@ -26,17 +26,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     // Handle profile image upload
-    imageUpload.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                profileImage.src = e.target.result;
-                localStorage.setItem('profilePic', e.target.result); // Save image to localStorage
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+  imageUpload.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        profileImage.src = URL.createObjectURL(file); // preview only
+    }
+});
 
   
     //save
@@ -47,37 +42,36 @@ window.addEventListener('DOMContentLoaded', () => {
         .filter(b => b.classList.contains('active'))
         .map(b => b.dataset.value);
 
-    const payload = {
-        userId: localStorage.getItem('userId'),
-        name: fullname.value,
-        email: email.value,
-        interests: selectedInterests
-    };
+    const formData = new FormData();
+    formData.append('userId', localStorage.getItem('userId'));
+    formData.append('name', fullname.value);
+    formData.append('email', email.value);
+    formData.append('interests', JSON.stringify(selectedInterests));
+    
 
     // Only include password if the user entered a new one
     if (password.value) {
-        payload.newPassword = password.value;
+        formData.append('newPassword', password.value);
+    }
+
+    if(imageUpload.files[0]) {
+        formData.append('profileImage', imageUpload.files[0]);
     }
 
     try {
         const response = await fetch("http://localhost:3000/update-profile", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
+            body: formData
         });
 
         const data = await response.json();
         alert(data.message);
 
-        // Update localStorage for instant UI update
-        localStorage.setItem('userName', fullname.value);
-        localStorage.setItem('userEmail', email.value);
-        localStorage.setItem('userInterests', JSON.stringify(selectedInterests));
+        if (data.profilePic) {
+            profileImage.src = `http://localhost:3000/uploads/${data.profilePic}`;
+            localStorage.setItem('profilePic', profileImage.src);
+        }
 
-        // Clear password field after update
-        password.value = '';
 
     } catch (err) {
         console.error(err);
