@@ -160,7 +160,7 @@ app.get("/reviews/:destination_id", (req, res) => {
 
     const destination_id = req.params.destination_id;
 
-    const sql = `SELECT reviews.*, users.name AS userName, users.id as userId
+    const sql = `SELECT reviews.*, users.name AS userName, users.id as userId, users.profile_pic as userProfilePic
                  FROM reviews 
                  LEFT JOIN users ON reviews.user_id = users.id
                  WHERE reviews.destination_id = ? ORDER BY reviews.id DESC`;
@@ -171,8 +171,15 @@ app.get("/reviews/:destination_id", (req, res) => {
             return res.status(500).json({ message: "Error fetching reviews" });
         }
 
-        console.log("Reviews query results:", results);
-        res.json(results);
+        const reviewsWithUrls = results.map(review => {
+            if (review.userProfilePic) {
+                review.userProfilePic = `http://localhost:3000/uploads/${review.userProfilePic}`;
+            }
+            return review;
+        });
+
+        console.log("Reviews query results:", reviewsWithUrls);
+        res.json(reviewsWithUrls);
     });
 });
 

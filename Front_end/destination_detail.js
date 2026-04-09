@@ -102,7 +102,7 @@ async function loadReviews() {
     reviews.forEach(r => {
         reviewDiv.innerHTML += `
             <div class="review">
-                <p><strong>${r.userName || "Unknown User"}</strong> ${"⭐".repeat(r.rating)}</p>
+                <p><strong>${r.userProfilePic ? `<img src="${r.userProfilePic}"  class="profile-pic"> ` : `<img src="src/profile.avif"  class="profile-pic"> `}${r.userName || "Unknown User"}</strong> ${"⭐".repeat(r.rating)}</p>
                 <p>${r.review}</p>
                 <hr class="hr-style">
                 <br>
