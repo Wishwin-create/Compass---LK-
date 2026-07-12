@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compass LK - Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="Landing_page.html" class="logo">
+            <img src="src/logo.png" width="34" />Compass LK
+        </a>
+
+        <nav>
+            <a href="destination.html">Destinations</a>
+            <a href="Calendar.html">Calendar</a>
+            <a href="Landing_page.html#how-to-use">Help</a>
+            <a href="admin.html" class="active-link" id="adminLink" >Admin</a>
+            <a href="itinerary.html" id="myItinerary" style="display:none;">My Itinerary</a>
+        </nav>
+
+        <div class="auth-section">
+            <button class="btn sign-in" onclick="window.location.href='login.html'">Sign In</button>
+            <button class="btn get-started" onclick="window.location.href='signup.html'">Get Started</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Admin Dashboard for <span class="highlight">Compass LK</span></h1>
+        <p>Monitor users, review activity, and remove suspicious content from one clean panel.</p>
+        <div class="hero-buttons">
+            <a href="#stats"><button class="btn primary">View Stats</button></a>
+            <a href="#recent-reviews"><button class="btn secondary">Check Reviews</button></a>
+        </div>
+    </section>
+
+    <section id="stats" class="section-container admin-section">
+        <h1 class="title">Platform <span>Overview</span></h1>
+        <p class="subtitle">The same card spacing and layout style used across the rest of the app.</p>
+
+        <div class="card-container stats-cards">
+            <div class="card stat-card">
+                <span class="stat-label">User Count</span>
+                <h2 id="userCount">0</h2>
+                <p>Total registered users on the platform.</p>
+            </div>
+            <div class="card stat-card">
+                <span class="stat-label">Review Count</span>
+                <h2 id="reviewCount">0</h2>
+                <p>Total reviews submitted by travelers.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="recent-reviews" class="help-container admin-help">
+        <h1>Recent Reviews</h1>
+        <p class="subtitle">Latest user feedback with quick moderation controls.</p>
+
+        <div class="panel-actions">
+            <button id="refreshBtn" class="cta-btn admin-refresh">Refresh Reviews</button>
+        </div>
+
+        <div id="reviewsList" class="grid reviews-grid">
+            <div class="loading">Loading recent reviews...</div>
+        </div>
+    </section>
+
+    <script src="app-config.js"></script>
+    <script src="Script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

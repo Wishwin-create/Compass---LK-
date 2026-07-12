@@ -7,7 +7,13 @@ window.addEventListener('DOMContentLoaded', () => {
     const signInBtn = document.querySelector('.sign-in');
     const signUpBtn = document.querySelector('.get-started');
     const myItinerary = document.getElementById('myItinerary');
+    const adminLink = document.getElementById('adminLink');
     
+    if (typeof updateAdminLinkVisibility === "function") {
+        updateAdminLinkVisibility();
+    } else if (adminLink) {
+        adminLink.style.display = localStorage.getItem("userEmail") === "johndoe@gmail.com" ? "inline-block" : "none";
+    }
 
     if (userName) {
         // Hide Sign In / Sign Up
@@ -65,6 +71,7 @@ window.addEventListener('DOMContentLoaded', () => {
             if (signInBtn) signInBtn.style.display = 'inline-block';
             if (signUpBtn) signUpBtn.style.display = 'inline-block';
             if (myItinerary) myItinerary.style.display = 'none';
+            if (adminLink) adminLink.style.display = 'none';
 
             signOutBtn.remove();
             window.location.href = 'Landing_page.html';

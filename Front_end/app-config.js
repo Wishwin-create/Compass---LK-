@@ -1,4 +1,5 @@
 const API_BASE = "http://localhost:3000";
+const ADMIN_EMAIL = "johndoe@gmail.com";
 
 function apiUrl(path) {
     if (!path) {
@@ -6,6 +7,20 @@ function apiUrl(path) {
     }
 
     return `${API_BASE}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+function getCurrentUserEmail() {
+    return localStorage.getItem("userEmail");
+}
+
+function isAdminUser() {
+    return getCurrentUserEmail() === ADMIN_EMAIL;
+}
+
+function updateAdminLinkVisibility() {
+    document.querySelectorAll("#adminLink").forEach(link => {
+        link.style.display = isAdminUser() ? "inline-block" : "none";
+    });
 }
 
 function bindButtonAnimations(selector) {

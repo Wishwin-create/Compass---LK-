@@ -9,6 +9,28 @@ const app = express();
 const PORT = 3000;
 const UPLOADS_BASE_URL = `http://localhost:${PORT}/uploads`;
 
+
+const ADMIN_EMAIL = "johndoe@gmail.com"; // <-- the one allowed admin
+
+function requireAdmin(req, res, next) {
+    // sent from frontend as a header on every admin request
+    const userId = req.header("x-user-id");
+
+    if (!userId) {
+        return res.status(401).json({ message: "Not authenticated" });
+    }
+
+    db.query("SELECT email FROM users WHERE id = ?", [userId], (err, results) => {
+        if (err) {
+            return res.status(500).json({ message: "Database error" });
+        }
+        if (results.length === 0 || results[0].email !== ADMIN_EMAIL) {
+            return res.status(403).json({ message: "Admin access only" });
+        }
+        next();
+    });
+}
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
@@ -167,6 +189,68 @@ app.get("/reviews/:destination_id", (req, res) => {
             ...review,
             userProfilePic: buildUploadUrl(review.userProfilePic)
         })));
+    });
+});
+
+app.get("/admin/stats", requireAdmin,(req, res) => {
+    const sql = `
+        SELECT
+            (SELECT COUNT(*) FROM users) AS userCount,
+            (SELECT COUNT(*) FROM reviews) AS reviewCount
+    `;
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            return res.status(500).json({ message: "Error fetching dashboard stats" });
+        }
+
+        res.json(results[0] || { userCount: 0, reviewCount: 0 });
+    });
+});
+
+app.get("/admin/reviews/recent",requireAdmin, (req, res) => {
+    const limit = Math.min(Number(req.query.limit) || 10, 50);
+
+    const sql = `
+        SELECT
+            reviews.id,
+            reviews.rating,
+            reviews.review,
+            reviews.destination_id,
+            reviews.user_id,
+            users.name AS userName,
+            users.profile_pic AS userProfilePic
+        FROM reviews
+        LEFT JOIN users ON reviews.user_id = users.id
+        ORDER BY reviews.id DESC
+        LIMIT ?
+    `;
+
+    db.query(sql, [limit], (err, results) => {
+        if (err) {
+            return res.status(500).json({ message: "Error fetching recent reviews" });
+        }
+
+        res.json(results.map(review => ({
+            ...review,
+            userProfilePic: buildUploadUrl(review.userProfilePic)
+        })));
+    });
+});
+
+app.delete("/admin/reviews/:id",requireAdmin, (req, res) => {
+    const id = req.params.id;
+
+    db.query("DELETE FROM reviews WHERE id = ?", [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ message: "Error deleting review" });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: "Review not found" });
+        }
+
+        res.json({ message: "Review deleted successfully" });
     });
 });
 
