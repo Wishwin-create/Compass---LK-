@@ -1,18 +1,33 @@
 const mysql = require("mysql2");
 
-const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "compass_lk"
+const {
+    DB_HOST = "127.0.0.1",
+    DB_PORT = "3306",
+    DB_USER = "root",
+    DB_PASSWORD = "",
+    DB_NAME = "compass_lk"
+} = process.env;
+
+const db = mysql.createPool({
+    host: DB_HOST,
+    port: Number(DB_PORT),
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-db.connect(err => {
+db.getConnection((err, connection) => {
     if (err) {
-        console.error("Database connection failed:", err);
+        console.error(
+            `MySQL connection failed for ${DB_USER}@${DB_HOST}:${DB_PORT}/${DB_NAME} - ${err.code || err.message}`
+        );
         return;
     }
-    console.log("MySQL Connected");
+
+    connection.release();
 });
 
 module.exports = db;

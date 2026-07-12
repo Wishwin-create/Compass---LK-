@@ -16,9 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Load interests from localStorage
     const stored = localStorage.getItem('userInterests');
-    console.log("Stored interests in localStorage:", stored);
     const savedInterests = stored ? JSON.parse(stored) : [];
-    console.log("Saved interests:", savedInterests);
     interestButtons.forEach(btn => {
         if (savedInterests.includes(btn.dataset.value)) btn.classList.add('active');
         btn.addEventListener('click', () => btn.classList.toggle('active'));
@@ -31,7 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (file) {
         profileImage.src = URL.createObjectURL(file); // preview only
     }
-});
+  });
 
   
     //save
@@ -59,7 +57,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-        const response = await fetch("http://localhost:3000/update-profile", {
+        const response = await fetch(apiUrl("/update-profile"), {
             method: "POST",
             body: formData
         });
@@ -68,7 +66,7 @@ window.addEventListener('DOMContentLoaded', () => {
         alert(data.message);
 
         if (data.profilePic) {
-            profileImage.src = `http://localhost:3000/uploads/${data.profilePic}`;
+            profileImage.src = apiUrl(`/uploads/${data.profilePic}`);
             localStorage.setItem('profilePic', profileImage.src);
         }
 

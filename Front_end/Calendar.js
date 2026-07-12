@@ -1,6 +1,9 @@
 const calendarEl = document.getElementById("calendar");
 const yearEl = document.getElementById("year");
-const events ={
+const select = document.getElementById("categorySelect");
+const filterPills = document.querySelectorAll(".filter-pill");
+
+const events = {
     "01-01": {
         title: "New Year's Day",
         description: "Celebration of the first day of the year.",
@@ -68,15 +71,12 @@ const events ={
     }
 };
 
-
-
 let currentYear = 2026;
-let activeFilter ="Cultural";
-
+let activeFilter = "Cultural";
 
 const months = [
-    "January","February","March","April","May","June",
-    "July","August","September","October","November","December"
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
 ];
 
 function renderCalendar(year) {
@@ -85,9 +85,21 @@ function renderCalendar(year) {
     months.forEach((month, index) => {
         const firstDay = new Date(year, index, 1).getDay();
         const daysInMonth = new Date(year, index + 1, 0).getDate();
-
         const card = document.createElement("div");
         card.className = "month-card";
+
+        let daysMarkup = '<div class="empty"></div>'.repeat(firstDay);
+
+        for (let d = 1; d <= daysInMonth; d++) {
+            const monthDayKey = `${String(index + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+            const event = events[monthDayKey];
+
+            if (event && (activeFilter === "All" || event.category === activeFilter)) {
+                daysMarkup += `<div class="day event-day" data-date="${monthDayKey}">${d}</div>`;
+            } else {
+                daysMarkup += `<div class="day">${d}</div>`;
+            }
+        }
 
         card.innerHTML = `
             <div class="month-title">${month}</div>
@@ -95,27 +107,8 @@ function renderCalendar(year) {
                 <div>Sun</div><div>Mon</div><div>Tue</div>
                 <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
             </div>
-            <div class="days"></div>
+            <div class="days">${daysMarkup}</div>
         `;
-
-        const daysEl = card.querySelector(".days");
-
-        for (let i = 0; i < firstDay; i++) {
-            daysEl.innerHTML += `<div class="empty"></div>`;
-        }
-
-        for (let d = 1; d <= daysInMonth; d++) {
-            const monthDayKey = `${String(index + 1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-
-    if (events[monthDayKey] && (activeFilter ==="All"|| events[monthDayKey].category===activeFilter)) {
-        daysEl.innerHTML += `
-            <div class="day event-day" data-date="${monthDayKey}">
-                ${d}
-            </div>`;
-    } else {
-        daysEl.innerHTML += `<div class="day">${d}</div>`;
-    }
-        }
 
         calendarEl.appendChild(card);
     });
@@ -126,64 +119,56 @@ function changeYear(step) {
     yearEl.textContent = currentYear;
     renderCalendar(currentYear);
 }
-yearEl.textContent = currentYear; 
 
-renderCalendar(currentYear);
-
-
-calendarEl.addEventListener("click",function(e) {
-    if(e.target.classList.contains("event-day")){
-        const date = e.target.dataset.date;
-        const event = events[date];
-
-        showModal(event.title, event.description);
-    }
-
-});
-
-function showModal(title,description){
+function showModal(title, description) {
     document.getElementById("modalTitle").textContent = title;
-    document.getElementById('modalDesc').textContent =description;
-    document.getElementById('eventModal').style.display="flex";
+    document.getElementById("modalDesc").textContent = description;
+    document.getElementById("eventModal").style.display = "flex";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+yearEl.textContent = currentYear;
+renderCalendar(currentYear);
 
+calendarEl.addEventListener("click", function(e) {
+    if (e.target.classList.contains("event-day")) {
+        const event = events[e.target.dataset.date];
+        showModal(event.title, event.description);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("eventModal");
     const closeBtn = document.querySelector(".close");
 
     if (closeBtn) {
-        closeBtn.addEventListener("click", function () {
+        closeBtn.addEventListener("click", function() {
             modal.style.display = "none";
         });
     }
-
 });
 
-window.onclick = function(e){
-    if(e.target.id === "eventModal"){
-        document.getElementById("eventModal").style.display="none";
+window.addEventListener("click", function(e) {
+    if (e.target.id === "eventModal") {
+        document.getElementById("eventModal").style.display = "none";
     }
-}
+});
 
-const filterPills = document.querySelectorAll(".filter-pill");
-
-filterPills.forEach(pill =>{
-    pill.addEventListener("click",function(){
-
-        filterPills.forEach(p =>p.classList.remove("active"));
-
+filterPills.forEach(pill => {
+    pill.addEventListener("click", function() {
+        filterPills.forEach(p => p.classList.remove("active"));
         this.classList.add("active");
-
         activeFilter = this.textContent;
+        if (select) {
+            select.value = activeFilter;
+        }
         renderCalendar(currentYear);
-
     });
 });
 
-const select= document.getElementById("categorySelect");
-select.addEventListener("change",function(){
-    activeFilter = this.value;
-    filterPills.forEach(p => p.classList.remove("active"));
-    renderCalendar(currentYear);
-})
+if (select) {
+    select.addEventListener("change", function() {
+        activeFilter = this.value;
+        filterPills.forEach(p => p.classList.remove("active"));
+        renderCalendar(currentYear);
+    });
+}

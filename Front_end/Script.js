@@ -1,10 +1,6 @@
-// Button animation
-document.querySelectorAll('.btn, .cta-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        btn.style.transform = 'scale(0.95)';
-        setTimeout(() => (btn.style.transform = 'scale(1)'), 150);
-    });
-});
+if (typeof bindButtonAnimations === "function") {
+    bindButtonAnimations(".btn, .cta-btn");
+}
 
 window.addEventListener('DOMContentLoaded', () => {
     const userName = localStorage.getItem('userName');
@@ -22,7 +18,10 @@ window.addEventListener('DOMContentLoaded', () => {
         if (myItinerary) myItinerary.style.display = 'inline-block';
 
         //Create Profile Section
-        const headerDiv = signInBtn.parentElement;
+        const headerDiv = signInBtn?.parentElement;
+        if (!headerDiv) {
+            return;
+        }
 
         //Create Profile Container
         const profileContainer = document.createElement('div');
@@ -72,7 +71,7 @@ window.addEventListener('DOMContentLoaded', () => {
         };
 
         // Append Sign Out
-        signInBtn.parentElement.appendChild(profileContainer);
-        signInBtn.parentElement.appendChild(signOutBtn);
+        headerDiv.appendChild(profileContainer);
+        headerDiv.appendChild(signOutBtn);
     }
 });

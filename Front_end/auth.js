@@ -6,14 +6,14 @@ if ("Notification" in window) {
 }
 
 form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // prevent page refresh
+    e.preventDefault();
 
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch("http://localhost:3000/signup", {
+        const response = await fetch(apiUrl("/signup"), {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -22,13 +22,19 @@ form.addEventListener("submit", async (e) => {
         });
 
         const data = await response.json();
+        const canNotify = Notification.permission === "granted";
 
-        if(Notification.permission === "granted") {
-            new Notification("Compass LK",{
+        if (!response.ok) {
+            alert(data.message || "Signup failed");
+            return;
+        }
+
+        if (canNotify) {
+            new Notification("Compass LK", {
                 body: data.message,
                 icon: "src/logo.png"
             });
-        }else {
+        } else {
             alert(data.message);
         }
 
