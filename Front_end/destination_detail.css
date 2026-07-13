@@ -234,6 +234,31 @@ body {
     background-color:#1a5fd1;
 }
 
+#viewMap{
+    background-color:#25d366;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    font-size:16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#viewMap:hover{
+    background-color:#23ae21;
+}
+
+.button-row{
+    display: flex;
+    gap: 12px;
+}
+
+#addToItineraryBtn,
+#viewMap{
+    flex: 0 0 auto;   
+    min-width: 180px; /* both match this width */
+    text-align: center;
+}
 /* ===== RESPONSIVE STYLES ===== */
 
 @media (max-width: 768px) {
