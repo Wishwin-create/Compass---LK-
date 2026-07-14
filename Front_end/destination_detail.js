@@ -164,3 +164,7 @@ itineraryBtn.addEventListener("click", () => {
     localStorage.setItem("itinerary", JSON.stringify(itinerary));
     window.location.href = "itinerary.html";
 });
+
+document.getElementById('viewMap').addEventListener('click', () => {
+    window.location.href = `map.html?id=${id}`;
+});

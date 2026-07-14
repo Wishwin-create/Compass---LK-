@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compass LK - Route Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
+        <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+
+        .map-header {
+            padding: 16px 24px;
+            text-align: center;
+            border-bottom: 3px solid #2e7d32;
+        }
+
+        .map-header h1 {
+            margin: 0;
+            color: #1b5e20;
+        }
+
+        .map-header p {
+            margin: 4px 0;
+            color: #2e7d32;
+        }
+
+        .map-header a {
+            display: inline-block;
+            margin-top: 8px;
+            color: #2e7d32;
+            text-decoration: none;
+        }
+
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="map-header">
+    <h1 id="destTitle">Compass LK</h1>
+    <p>Find your route across Sri Lanka</p>
+    <a href="destination_detail.html" id="backLink">⬅ Back to destination</a>
+</div>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+<script src="destination_data.js"></script>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const destId = params.get('id');
+const dest = DESTINATIONS[destId];
+
+if (!dest || dest.lat == null || dest.lng == null) {
+    document.getElementById('map').innerHTML =
+        "<p style='padding:20px;'>Sorry, no location data is available for this destination yet.</p>";
+    throw new Error("Destination not found or missing coordinates: " + destId);
+}
+
+document.getElementById('destTitle').textContent = "Route to " + dest.title;
+document.getElementById('backLink').href = "destination_detail.html?id=" + destId;
+
+const map = L.map('map').setView([dest.lat, dest.lng], 9);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+const destination = L.latLng(dest.lat, dest.lng);
+L.marker(destination).addTo(map).bindPopup(dest.title);
+
+let routingControl;
+
+function drawRoute(start) {
+    if (routingControl) map.removeControl(routingControl);
+
+    routingControl = L.Routing.control({
+        waypoints: [start, destination],
+        routeWhileDragging: true,
+        lineOptions: {
+            styles: [{ color: '#2e7d32', weight: 5 }]
+        },
+        show: true
+    }).addTo(map);
+}
+
+function useMyLocation() {
+    if (!navigator.geolocation) {
+        alert("Geolocation isn't supported by your browser. Falling back to Colombo.");
+        drawRoute(L.latLng(6.9271, 79.8612));
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const userLatLng = L.latLng(position.coords.latitude, position.coords.longitude);
+            L.marker(userLatLng).addTo(map).bindPopup("You are here").openPopup();
+            map.setView(userLatLng, 9);
+            drawRoute(userLatLng);
+        },
+        (error) => {
+            console.warn("Geolocation failed:", error.message);
+            alert("Couldn't get your location — using Colombo as the starting point instead.");
+            drawRoute(L.latLng(6.9271, 79.8612));
+        },
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}
+
+useMyLocation();
+
+</script>
+
+</body>
+</html>
