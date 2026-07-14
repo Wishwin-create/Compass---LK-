@@ -242,6 +242,10 @@ nav a.active-link {
     padding: 30px 25px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
     transition: 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
 }
 
 .review-card:hover {
@@ -293,7 +297,7 @@ nav a.active-link {
 }
 
 .review-text {
-    margin-top: 15px;
+    margin-top: 15px; 
     color: var(--muted);
     line-height: 1.7;
     word-break: break-word;
@@ -303,6 +307,7 @@ nav a.active-link {
     display: flex;
     justify-content: flex-end;
     margin-top: 16px;
+    margin-top: auto;
 }
 
 .delete-review {
@@ -314,6 +319,7 @@ nav a.active-link {
     cursor: pointer;
     font-size: 15px;
     transition: 0.2s ease;
+    min-width: 180px;
 }
 
 .delete-review:hover {
