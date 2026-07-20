@@ -124,6 +124,4 @@ The backend includes role-based access control checks for administrative operati
 
 This project is licensed under the ISC License.
 
-## Acknowledgements
 
-This project was developed as part of a final-year academic initiative focused on intelligent and user-friendly travel planning.
