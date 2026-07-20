@@ -6,7 +6,7 @@ The system is designed as a full-stack web application that combines a static fr
 
 ## Project Overview
 
-This project was developed as a final-year academic project with the aim of simplifying travel planning for users interested in discovering Sri Lanka’s cultural, scenic, and historical destinations. The platform provides a centralized digital experience for browsing destinations, managing trip schedules, and saving travel preferences.
+This project was developed as an aim of simplifying travel planning for users interested in discovering Sri Lanka’s cultural, scenic, and historical destinations. The platform provides a centralized digital experience for browsing destinations, managing trip schedules, and saving travel preferences.
 
 ## Objectives
 
